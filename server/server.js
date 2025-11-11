@@ -5,7 +5,17 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+// ✅ Secure CORS setup — allow your frontend URLs
+app.use(cors({
+  origin: [
+    "http://localhost:5500",                // for local testing
+    "https://myportfolio-7br8.onrender.com" // your Render frontend URL (if you deploy frontend there)
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // ✅ MongoDB Connection
@@ -13,7 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch(err => console.log("❌ MongoDB connection error:", err));
 
-// ✅ Create a simple Schema and Model
+// ✅ Contact Schema
 const contactSchema = new mongoose.Schema({
   email: { type: String, required: true },
 });
@@ -38,7 +48,7 @@ app.post("/api/contact", async (req, res) => {
     const newContact = new Contact({ email });
     await newContact.save();
 
-    // Send yourself a notification email
+    // Send notification email to you
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -61,6 +71,6 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// ✅ Start the server
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
