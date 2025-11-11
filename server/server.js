@@ -9,12 +9,14 @@ const app = express();
 // ✅ Secure CORS setup — allow your frontend URLs
 app.use(cors({
   origin: [
-    "http://localhost:5500",                // for local testing
-    "https://myportfolio-7br8.onrender.com" // your Render frontend URL (if you deploy frontend there)
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "https://myportfolio-7br8.onrender.com"
   ],
   methods: ["GET", "POST"],
   credentials: true
 }));
+
 
 app.use(express.json());
 
@@ -41,6 +43,7 @@ const transporter = nodemailer.createTransport({
 
 // ✅ POST API Route
 app.post("/api/contact", async (req, res) => {
+  console.log("📩 Received request body:", req.body);
   try {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: "Email is required" });
