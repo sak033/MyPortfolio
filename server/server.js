@@ -34,14 +34,15 @@ const Contact = mongoose.model("Contact", contactSchema);
 
 // ✅ Nodemailer Setup
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // use SSL
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: false, // use true only for port 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
+
 
 // ✅ POST API Route
 app.post("/api/contact", async (req, res) => {
