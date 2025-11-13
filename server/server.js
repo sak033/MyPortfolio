@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
 require("dotenv").config();
+const axios = require("axios");
 
 const app = express();
 app.use(cors());
@@ -19,15 +19,30 @@ const contactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model("Contact", contactSchema);
 
-// ✅ Brevo SMTP Setup
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST, // smtp-relay.brevo.com
-  port: process.env.SMTP_PORT, // 587
-  auth: {
-    user: process.env.EMAIL_USER, // your verified Brevo sender
-    pass: process.env.EMAIL_PASS, // your Brevo API key
-  },
-});
+// ✅ Brevo API Email Sender
+async function sendBrevoEmail(email) {
+  try {
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: { email: process.env.EMAIL_USER, name: "Portfolio Contact" },
+        to: [{ email: process.env.EMAIL_USER }], // Send to yourself
+        subject: "📬 New Contact Form Submission",
+        htmlContent: `<p>You received a new contact: <b>${email}</b></p>`
+      },
+      {
+        headers: {
+          "api-key": process.env.EMAIL_PASS, // Your Brevo API KEY
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("📧 Email sent successfully:", response.data);
+  } catch (error) {
+    console.error("❌ Email send failed:", error.response?.data || error.message);
+  }
+}
 
 // ✅ POST API
 app.post("/api/contact", async (req, res) => {
@@ -40,16 +55,8 @@ app.post("/api/contact", async (req, res) => {
     const newContact = new Contact({ email });
     await newContact.save();
 
-    // ✅ Send email notification to you
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Send to yourself
-      subject: "📬 New Contact from Portfolio",
-      html: `<p>You received a new contact email from: <b>${email}</b></p>`,
-    };
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ Email sent successfully:", info.messageId);
+    // Send notification through Brevo
+    await sendBrevoEmail(email);
 
     res.status(200).json({ message: "✅ Email saved and notification sent!" });
   } catch (error) {
