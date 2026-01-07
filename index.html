@@ -26,11 +26,12 @@
             
         </li>
         <li>
-            <a href="#certificates">Certificates</a>
-        </li>
-        <li>
             <a href="#projects">Projects</a>
         </li>
+        <li>
+            <a href="#certificates">Certificates</a>
+        </li>
+        
         <li>
             <a href="#contact">Contact</a>
         </li>
@@ -50,7 +51,7 @@
         <div class="text">
             <h3>Hi, I'm</h3>
             <h1>Sakshi Kuthe</h1>
-            <span>Frontend Developer</span>
+            <span id="typing"></span>
         </div>
 
        <div class="btn-groups">
@@ -99,73 +100,81 @@
     </div>
    </section>
 
-   <!--Skills Sections-->
+   <section id="skills" class="skills-growth">
+  <h2 class="section-title">Skills & Growth</h2>
 
-   <section id="skills" class="skills">
-    <h2 class="section-title">Skills</h2>
+  <div class="skills-layout">
 
-    <div class="skills-grid">
-        <div class="skill-card">
-            <i class="fa-brands fa-html5"></i>
-            <h3>HTML</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-css"></i>
-            <h3>CSS</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-js"></i>
-            <h3>JAVASCRIPT</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-java"></i>
-            <h3>JAVA</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-solid fa-database"></i>
-            <h3>SQL</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-php"></i>
-            <h3>PHP</h3>
-        </div>
-        <div class="skill-card">
-            <i class="fa-brands fa-android"></i>
-            <h3>Android App Development</h3>
-            <h4>Kotlin-XML</h4>
-        </div>
-    </div>
-   </section>
+    <!-- Core Skills -->
+    <div class="skills-box">
+      <h3>Core Skills</h3>
 
-   <!-- Certificates Section -->
-<section id="certificates" class="certificates">
-  <h2 class="section-title">Certificates</h2>
+      <div class="skills-cards">
+        <div class="skill-mini">
+          <i class="fa-brands fa-html5"></i>
+          <span>HTML</span>
+        </div>
 
-  <div class="certificates-grid">
-    <div class="certificate-card">
-      <img src="Images/web development internship.jpg" alt="Certificate 1">
-      <h3>Web Development</h3>
-      <p>Anishree Technologies Nagpur</p>
-      <a href="https://drive.google.com/file/d/1oDz8FzrbWEkPwloT0HcEqlQoOYwRob8d/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
+        <div class="skill-mini">
+          <i class="fa-brands fa-css3-alt"></i>
+          <span>CSS</span>
+        </div>
+
+        <div class="skill-mini">
+          <i class="fa-brands fa-js"></i>
+          <span>JavaScript</span>
+        </div>
+
+        <div class="skill-mini">
+          <i class="fa-brands fa-react"></i>
+          <span>React</span>
+        </div>
+
+        <div class="skill-mini">
+          <i class="fa-brands fa-node-js"></i>
+          <span>Node.js</span>
+        </div>
+
+        <div class="skill-mini">
+          <i class="fa-solid fa-database"></i>
+          <span>MongoDB</span>
+        </div>
+      </div>
     </div>
 
-    <div class="certificate-card">
-      <img src="Images/full stack development.pdf.jpg" alt="Certificate 2">
-      <h3>Full Stack Development</h3>
-      <p>Udemy — Instructed by Duhan Gökkaya</p>
-      <a href="https://drive.google.com/file/d/1Kns55p8Sv8nvV0e6U_1d3h6BLLPdXsA0/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
+    <!-- Learning -->
+    <div class="learning-box">
+      <h3>Currently Learning</h3>
+
+      <div class="learning-cards">
+        <div class="learning-item">
+          <i class="fa-brands fa-react"></i>
+          <p>Advanced React Patterns</p>
+        </div>
+
+        <div class="learning-item">
+          <i class="fa-solid fa-diagram-project"></i>
+          <p>System Design Basics</p>
+        </div>
+
+        <div class="learning-item">
+          <i class="fa-solid fa-shield-halved"></i>
+          <p>API Security</p>
+        </div>
+
+        <div class="learning-item">
+          <i class="fa-brands fa-node-js"></i>
+          <p>MERN Best Practices</p>
+        </div>
+      </div>
     </div>
 
-    <div class="certificate-card">
-      <img src="Images/advance java.jpg" alt="Certificate 3">
-      <h3>Advance Java</h3>
-      <p>Government Polytechnique Nagpur</p>
-      <a href="https://drive.google.com/file/d/17jeGIEPfweUDCyMRdG2wUGCs1Ok9ialT/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
-    </div>
   </div>
 </section>
 
 
+
+   
    <!--Project Section-->
 
    <section id="projects" class="projects">
@@ -204,6 +213,36 @@
       </div>
 
    </section>
+
+   <!-- Certificates Section -->
+<section id="certificates" class="certificates">
+  <h2 class="section-title">Certificates</h2>
+
+  <div class="certificates-grid">
+    <div class="certificate-card">
+      <img src="Images/web development internship.jpg" alt="Certificate 1">
+      <h3>Web Development</h3>
+      <p>Anishree Technologies Nagpur</p>
+      <a href="https://drive.google.com/file/d/1oDz8FzrbWEkPwloT0HcEqlQoOYwRob8d/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
+    </div>
+
+    <div class="certificate-card">
+      <img src="Images/full stack development.pdf.jpg" alt="Certificate 2">
+      <h3>Full Stack Development</h3>
+      <p>Udemy — Instructed by Duhan Gökkaya</p>
+      <a href="https://drive.google.com/file/d/1Kns55p8Sv8nvV0e6U_1d3h6BLLPdXsA0/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
+    </div>
+
+    <div class="certificate-card">
+      <img src="Images/advance java.jpg" alt="Certificate 3">
+      <h3>Advance Java</h3>
+      <p>Government Polytechnique Nagpur</p>
+      <a href="https://drive.google.com/file/d/17jeGIEPfweUDCyMRdG2wUGCs1Ok9ialT/view?usp=drive_link" target="_blank" class="btn">View Credential</a>
+    </div>
+  </div>
+</section>
+
+
 
    <!--Contact Footer-->
    <!--Contact Footer-->

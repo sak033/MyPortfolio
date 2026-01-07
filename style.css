@@ -7,6 +7,26 @@
     scroll-behavior: smooth;
     list-style: none;
 }
+:root {
+  --bg-main: #020617;
+  --bg-section: #0a0f1f;
+  --bg-card: #020617;
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --accent: rgb(124, 58, 237);
+  --accent-soft: rgba(124, 58, 237, 0.12);
+
+  --border-soft: rgba(255, 255, 255, 0.08);
+}
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+
+
 header{
 position: fixed;
 top: 1rem;
@@ -15,7 +35,7 @@ transform: translateX(-50%);
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 5rem;
+gap: 2.5rem;
 background-color: rgba(0, 0, 0, 0.8);
 backdrop-filter: blur(8px);
 color: white;
@@ -37,13 +57,13 @@ z-index: 1000;
 
 .nav-links{
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
 }
 li a{
     position: relative;
     color: white;
     font-weight: 300;
-
+    white-space: nowrap;
 }
 
 li a::before{
@@ -89,13 +109,39 @@ section{
     padding: 6rem 12%;
     width:100%;
     position: relative;
+    background: transparent;
 }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .about{
     display: flex;
     min-height: 100vh;
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(124, 58, 237, 0.08),
+    transparent 60%
+  );
+  z-index: -1;
 }
 .about .about-container{
     display: flex;
@@ -107,7 +153,7 @@ section{
 .about img{
     width: 30vw;
     border-radius: 50%;
-
+    animation: fadeUp 0.8s ease forwards;
 }
 .info-box{
     display:flex;
@@ -116,6 +162,7 @@ section{
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
+    animation: fadeUp 1s ease forwards;
 }
 
 .info-box h3{
@@ -134,24 +181,68 @@ section{
    font-size: 2rem;
 }
 
+/* Typing effect */
+#typing {
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    rgb(0,157,255),
+    rgb(255,0,255)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+
+/* Blinking cursor */
+#typing::after {
+  content: "|";
+  margin-left: 5px;
+  color: rgb(255, 0, 255);
+  animation: blink 1s infinite;
+  display: none;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
 .btn-groups{
     display: flex;
     gap: 1rem;
 }
-.btn{
-    color: black;
-    text-decoration: none;
-    border-radius: 3rem;
-    padding: 0.5rem 1.5rem;
-    border: 2px solid black;
-    cursor: pointer;
-    font-weight: 500;
-    text-wrap: nowrap;
-    transition: 0.2s ease-in-out;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.65rem 1.8rem;
+  border-radius: 3rem;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  color: white;
+  background: transparent;
+  border: 1px solid var(--border-soft);
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
+
+.btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
 .btn:hover{
-    background-color: black;
-    color: white;
+   background: var(--accent);
+  border-color: var(--accent);
 }
 .socials{
     display: flex;
@@ -185,6 +276,7 @@ section{
 
 .experience{
     margin-top: 0;
+    background: var(--bg-main);
 }
 
 .experience-info{
@@ -203,7 +295,8 @@ section{
     gap: 2rem;
 }
 .grid-card{
-    border: 2px solid black;
+     background: var(--bg-section);
+    border: 1px solid var(--border-soft);
     border-radius: 3rem;
     padding: 3rem;
     display:flex;
@@ -213,6 +306,9 @@ section{
     cursor: pointer;
     transition: 0.2s ease-in-out;
 
+}
+.grid-card p {
+  color: var(--text-muted);
 }
 .grid-card:hover{
     transform: scale(1.02);
@@ -243,6 +339,7 @@ section{
 
 .projects{
     margin-top: -5rem;
+    background: var(--bg-main);
 }
 
 .projects-grid {
@@ -260,13 +357,14 @@ section{
   justify-content: space-between; /* Keeps spacing even */
   align-items: center;
   text-align: center;
-  border: 2px solid black;
+  border: 1px solid var(--border-soft);
   border-radius: 2rem;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  background-color: #fff;
+  background: var(--bg-section);
   height: 100%; /* Make all cards same height */
   box-sizing: border-box;
+  color: var(--text-main);
 }
 
 /* Uniform image box for all */
@@ -291,6 +389,7 @@ section{
     font-weight: 400;
     opacity: 0.8;
     margin-bottom: 1.5rem;
+     color: var(--text-muted);
 }
 
 /* Make Tic Tac Toe image smaller 
@@ -303,15 +402,7 @@ section{
 }
 */
 
-.project-card:hover .btn{
-    border: 2px solid white;
-    color: white;
-}
-.project-card:hover .btn:hover{
-    border: 2px solid white;
-    background-color: white;
-    color:black ;
-}
+
 .project-card h3{
     font-size: 2rem;
     font-weight: 500;
@@ -327,12 +418,15 @@ section{
     margin-top: 5rem;
 }
 .input-box input{
-     width: 100%;
+  width: 100%;
   max-width: 420px;
   padding: 1rem 1.2rem 1rem 3rem;
   font-size: 1.2rem;
   border-radius: 3rem;
-  border: 2px solid black;
+   background: var(--bg-section);
+  border: 1px solid var(--border-soft);
+  color: white;
+  
 }
 .info-box input::placeholder{
     font-size: 3rem;
@@ -352,9 +446,10 @@ section{
 }
 
 .contact{
-    margin-top: -10rem;
+    margin-top: 0;
     min-height: auto;
   padding-bottom: 4rem;
+  background: var(--bg-main);
 }
 
 /* Keep same layout for form */
@@ -367,21 +462,8 @@ section{
 
 /* Prevent button from stretching weirdly */
 #contact-form .btn {
-  border-radius: 3rem;
-  padding: 0.8rem 2rem;
-  border: 2px solid black;
-  background: none;
-  cursor: pointer;
-  margin-top: 15px;
-  font-weight: 500;
-  transition: 0.2s ease-in-out;
+  align-self: center;
 }
-
-#contact-form .btn:hover {
-  background-color: black;
-  color: white;
-}
-/* Footer Section */
 /* Footer Section */
 footer {
   background: rgba(0, 0, 0, 0.85);
@@ -419,58 +501,95 @@ footer ul li a {
 
 /* Skills Section */
 
-.skills{
-    padding: 5rem 12%;
-    margin-top: 0;
+.skills-growth {
+  padding: 5rem 12%;
+  background: var(--bg-main);
 }
-.skills-grid {
+
+.skills-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: 2fr 1.3fr;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+/* Shared box style */
+.skills-box,
+.learning-box {
+  background: #0a0f1f;
+  border-radius: 1.8rem;
+  padding: 2.5rem;
+}
+
+/* Headings */
+.skills-box h3,
+.learning-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+/* Core skills cards */
+.skills-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 1.2rem;
-  margin-top: 2.5rem;
 }
 
-/* Skill Card (Tech Stack Style) */
-.skill-card {
+.skill-mini {
   background: #020617;
-  padding: 1.2rem 1rem;
   border-radius: 1rem;
+  padding: 1.2rem;
   text-align: center;
-  cursor: pointer;
-
-  transition: transform 0.3s ease,
-              box-shadow 0.3s ease,
-              background 0.3s ease;
+  transition: 0.3s ease;
 }
 
-/* Icon */
-.skill-card i {
-  font-size: 2.4rem;
+.skill-mini i {
+  font-size: 1.8rem;
   color: #cbd5f5;
-  margin-bottom: 0.5rem;
-
-  transition: transform 0.3s ease,
-              filter 0.3s ease;
+  margin-bottom: 0.4rem;
 }
 
-/* Text */
-.skill-card h3,
-.skill-card h4 {
+.skill-mini span {
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+.skill-mini:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.35);
+}
+
+/* Learning cards */
+.learning-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.learning-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(124, 58, 237, 0.12);
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+}
+
+.learning-item i {
+  font-size: 1.4rem;
+  color: rgb(124, 58, 237);
+}
+
+.learning-item p {
   font-size: 0.95rem;
-  color: #cbd5f5;
-  font-weight: 500;
+  color: #e5e7eb;
 }
 
-/* Hover Effect */
-.skill-card:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-}
-
-/* Icon Glow + Rotate */
-.skill-card:hover i {
-  transform: rotate(6deg) scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
+/* Mobile */
+@media (max-width: 900px) {
+  .skills-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -478,7 +597,7 @@ footer ul li a {
 /* Certificates Section */
 .certificates {
   text-align: center;
-  background-color: white;
+  background: var(--bg-main);
   padding: 5rem 12%;
   margin-top: 0;
 }
@@ -491,10 +610,11 @@ footer ul li a {
 }
 
 .certificate-card {
-  border: 2px solid black;
+  
   border-radius: 2rem;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background: var(--bg-section);
+  border: 1px solid var(--border-soft);
   transition: all 0.3s ease-in-out;
   text-align: center;
 }
@@ -522,24 +642,10 @@ footer ul li a {
 .certificate-card p {
   font-size: 0.95rem;
   margin-bottom: 1rem;
+  color: var(--text-muted);
 }
 
-.certificate-card .btn {
-  border: 2px solid black;
-  border-radius: 3rem;
-  padding: 0.5rem 1.2rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-}
 
-.certificate-card:hover .btn {
-  border: 2px solid white;
-  color: white;
-}
 
 .certificate-card:hover .btn:hover {
   background: white;
@@ -586,6 +692,10 @@ header .visit-btn{
 .about-container{
     flex-direction: column;
 }
+.about img:hover {
+    transform: none;
+    box-shadow: none;
+  }
 .input-box input{
     padding: 1rem 2rem;
     font-size: 1.8rem;

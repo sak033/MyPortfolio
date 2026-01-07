@@ -8,7 +8,46 @@ menuIcon.onclick= ()=>{
 }
 
 
-// Handle Contact Form Submission
+// Typing animation
+// Typing animation with multiple roles
+const roles = ["Frontend Developer", "MERN Stack Developer"];
+const typingElement = document.getElementById("typing");
+
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  if (!typingElement) return;
+
+  const currentRole = roles[roleIndex];
+
+  if (!isDeleting) {
+    typingElement.textContent = currentRole.slice(0, charIndex + 1);
+    charIndex++;
+
+    if (charIndex === currentRole.length) {
+      setTimeout(() => (isDeleting = true), 1200);
+    }
+  } else {
+    typingElement.textContent = currentRole.slice(0, charIndex - 1);
+    charIndex--;
+
+    if (charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+    }
+  }
+
+  setTimeout(typeEffect, isDeleting ? 60 : 100);
+}
+
+// Start after page load
+window.addEventListener("load", () => {
+  typingElement.textContent = "";
+  typeEffect();
+});
+
 
 
 
