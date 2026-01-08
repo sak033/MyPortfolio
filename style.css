@@ -15,10 +15,15 @@
   --text-main: #e5e7eb;
   --text-muted: #9ca3af;
 
-  --accent: rgb(124, 58, 237);
+  --accent: rgb(57, 25, 111);
   --accent-soft: rgba(124, 58, 237, 0.12);
 
   --border-soft: rgba(255, 255, 255, 0.08);
+  --gradient-main: linear-gradient(
+    to right,
+    rgb(0,157,255),
+    rgb(255,0,255)
+  );
 }
 body {
   background: var(--bg-main);
@@ -154,6 +159,9 @@ section{
     width: 30vw;
     border-radius: 50%;
     animation: fadeUp 0.8s ease forwards;
+    box-shadow:
+    0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 }
 .info-box{
     display:flex;
@@ -222,17 +230,20 @@ section{
 
   padding: 0.65rem 1.8rem;
   border-radius: 3rem;
-
   font-size: 0.95rem;
   font-weight: 500;
-
   color: white;
-  background: transparent;
-  border: 1px solid var(--border-soft);
+
+  border: 2px solid transparent;
+
+  background:
+    linear-gradient(#020617, #020617) padding-box,
+    var(--gradient-main) border-box;
 
   cursor: pointer;
   transition: all 0.25s ease;
 }
+
 
 .btn:hover {
   background: var(--accent);
@@ -285,10 +296,40 @@ section{
     justify-content: center;
     gap: 5rem;
 }
-.experience img{
-    width: 24vw;
-    border-radius: 3rem;
+.experience-image {
+  perspective: 1200px;
 }
+.holo-card {
+  position: relative;
+  width: 280px;
+  border-radius: 2rem;
+  padding: 0.6rem;
+
+  background:
+    linear-gradient(var(--bg-section), var(--bg-section)) padding-box,
+    linear-gradient(135deg, rgb(0,157,255), rgb(255,0,255)) border-box;
+
+  border: 2px solid transparent;
+
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 40px rgba(124,58,237,0.25);
+}
+.holo-card img {
+  width: 100%;
+  border-radius: 1.6rem;
+  display: block;
+}
+.holo-card:hover {
+  transform: rotateY(-10deg) rotateX(6deg) translateY(-8px);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.8),
+    0 0 60px rgba(124,58,237,0.45);
+}
+
 .grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -305,6 +346,8 @@ section{
     justify-content: left;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    box-shadow: 0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 
 }
 .grid-card p {
@@ -338,7 +381,7 @@ section{
 }
 
 .projects{
-    margin-top: -5rem;
+    margin-top: 0;
     background: var(--bg-main);
 }
 
@@ -365,9 +408,76 @@ section{
   height: 100%; /* Make all cards same height */
   box-sizing: border-box;
   color: var(--text-main);
+  box-shadow: 0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 }
 
 /* Uniform image box for all */
+
+.profile-wrapper {
+  position: relative;
+  width: 360px;
+  height: 460px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.ring-shape {
+  position: absolute;
+  width: 320px;
+  height: 380px;
+
+  background: linear-gradient(
+    135deg,
+    rgb(0,157,255),
+    rgb(255,0,255)
+  );
+
+  /* Kidney / organic shape */
+  border-radius: 
+    60% 40% 55% 45% /
+    55% 60% 40% 45%;
+
+  filter: blur(0.3px);
+  opacity: 0.9;
+
+  /* Push ring slightly left like reference */
+  transform: translateX(-20px);
+
+  z-index: 1;
+}
+.ring-shape::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+
+  background: var(--bg-main);
+
+  border-radius: 
+    58% 42% 54% 46% /
+    54% 58% 42% 46%;
+
+  z-index: 2;
+}
+.profile-img {
+  position: relative;
+  z-index: 3;
+
+  height: 420px;
+  object-fit: contain;
+
+  /* Head comes out of ring */
+  transform: translateY(-30px);
+
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+}
+.ring-shape {
+  box-shadow:
+    0 0 60px rgba(124,58,237,0.45),
+    0 0 120px rgba(0,157,255,0.25);
+}
+
+
 .project-card img {
   width: 100%;
   max-width: 250px;
@@ -462,6 +572,8 @@ section{
   padding: 3rem 2.5rem;
   text-align: center;
   animation: fadeUp 0.8s ease forwards;
+  box-shadow: 0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 }
 
 .contact-subtitle {
@@ -592,6 +704,8 @@ footer ul li a {
   background: #0a0f1f;
   border-radius: 1.8rem;
   padding: 2.5rem;
+  box-shadow: 0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 }
 
 /* Headings */
@@ -690,6 +804,8 @@ footer ul li a {
   border: 1px solid var(--border-soft);
   transition: all 0.3s ease-in-out;
   text-align: center;
+  box-shadow: 0 0 0 6px rgba(10, 36, 79, 0.15),
+    0 0 40px rgba(153, 94, 209, 0.25);
 }
 
 .certificate-card:hover {
@@ -799,6 +915,7 @@ section {
     transform: none;
     filter: none;
   }
+  
 }
 
 @media(max-width:600px) {
@@ -863,5 +980,64 @@ section {
 @media (max-width: 1024px) {
   .contact {
     margin-top: 0;
+  }
+  
+}
+
+/* ================= PROFILE IMAGE RESPONSIVENESS ================= */
+
+/* Default (Laptop stays EXACT same) */
+.profile-wrapper {
+  flex-shrink: 0;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .profile-wrapper {
+    width: 300px;
+    height: 390px;
+  }
+
+  .ring-shape {
+    width: 270px;
+    height: 330px;
+  }
+
+  .profile-img {
+    height: 360px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .profile-wrapper {
+    width: 260px;
+    height: 340px;
+  }
+
+  .ring-shape {
+    width: 235px;
+    height: 295px;
+  }
+
+  .profile-img {
+    height: 315px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .profile-wrapper {
+    width: 230px;
+    height: 300px;
+  }
+
+  .ring-shape {
+    width: 205px;
+    height: 260px;
+  }
+
+  .profile-img {
+    height: 280px;
   }
 }

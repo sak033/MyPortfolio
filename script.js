@@ -1,12 +1,26 @@
 // ================= MENU TOGGLE =================
 const menuIcon = document.querySelector("#menu-icon");
-const navLink = document.querySelector(".nav-links");
+const navLinks = document.querySelector(".nav-links");
+const navItems = document.querySelectorAll(".nav-links li a");
 
-if (menuIcon && navLink) {
-  menuIcon.onclick = () => {
-    navLink.classList.toggle("active");
-  };
-}
+// Toggle menu on hamburger click
+menuIcon.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+// Close menu when any nav link is clicked
+navItems.forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+  });
+});
+
+document.addEventListener("click", (e) => {
+  if (!navLinks.contains(e.target) && !menuIcon.contains(e.target)) {
+    navLinks.classList.remove("active");
+  }
+});
+
 
 // ================= TYPING ANIMATION =================
 const roles = ["Frontend Developer", "MERN Stack Developer"];
