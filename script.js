@@ -72,7 +72,7 @@ if (contactForm && responseMsg) {
 
     try {
       const res = await fetch(
-        "https://myportfolio-7br8.onrender.com/api/contact",
+        "https://myportfolio-backend-r5e3.onrender.com/api/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
