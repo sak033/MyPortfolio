@@ -1,15 +1,14 @@
-//variables
-const menuIcon = document.querySelector('#menu-icon');
-const navLink = document.querySelector('.nav-links');
+// ================= MENU TOGGLE =================
+const menuIcon = document.querySelector("#menu-icon");
+const navLink = document.querySelector(".nav-links");
 
-//function---Arrow function
-menuIcon.onclick= ()=>{
-    navLink.classList.toggle('active');
+if (menuIcon && navLink) {
+  menuIcon.onclick = () => {
+    navLink.classList.toggle("active");
+  };
 }
 
-
-// Typing animation
-// Typing animation with multiple roles
+// ================= TYPING ANIMATION =================
 const roles = ["Frontend Developer", "MERN Stack Developer"];
 const typingElement = document.getElementById("typing");
 
@@ -42,61 +41,69 @@ function typeEffect() {
   setTimeout(typeEffect, isDeleting ? 60 : 100);
 }
 
-// Start after page load
 window.addEventListener("load", () => {
-  typingElement.textContent = "";
-  typeEffect();
+  if (typingElement) {
+    typingElement.textContent = "";
+    typeEffect();
+  }
 });
 
-
-
-
-// Handle contact form submission
+// ================= CONTACT FORM =================
 const contactForm = document.getElementById("contact-form");
 const responseMsg = document.getElementById("response-msg");
 
-if (contactForm) {
+if (contactForm && responseMsg) {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+    const submitBtn = contactForm.querySelector("button");
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
 
+    // Validation
     if (!email) {
       responseMsg.textContent = "⚠️ Please enter your email address.";
       responseMsg.style.color = "orange";
       return;
     }
 
-    try {
-     const res = await fetch("https://myportfolio-7br8.onrender.com/api/contact", {
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+    try {
+      const res = await fetch(
+        "https://myportfolio-7br8.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       const data = await res.json();
 
       if (res.ok) {
-        responseMsg.textContent = "✅ Thank you! I'll get back to you soon 😊";
+        responseMsg.textContent =
+          "✅ Thank you! I'll get back to you soon 😊";
         responseMsg.style.color = "green";
         contactForm.reset();
       } else {
-        responseMsg.textContent = `⚠️ ${data.message || "Something went wrong!"}`;
+        responseMsg.textContent =
+          `⚠️ ${data.message || "Something went wrong!"}`;
         responseMsg.style.color = "red";
       }
     } catch (err) {
-      responseMsg.textContent = "❌ Server error. Please try again later.";
+      responseMsg.textContent =
+        "❌ Server error. Please try again later.";
       responseMsg.style.color = "red";
+    } finally {
+      submitBtn.textContent = "Send Message →";
+      submitBtn.disabled = false;
+
+      responseMsg.style.opacity = "1";
+      setTimeout(() => {
+        responseMsg.style.opacity = "0";
+      }, 5000);
     }
-
-    // Smooth fade effect
-    responseMsg.style.opacity = "1";
-    responseMsg.style.transition = "opacity 0.4s ease";
-
-    // Hide message after 5 seconds
-    setTimeout(() => {
-      responseMsg.style.opacity = "0";
-    }, 5000);
   });
 }
