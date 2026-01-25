@@ -217,7 +217,9 @@ section{
   25%, 75% { opacity: 0; }
 }
 
-
+.demo-btn{
+    margin-top: 6px;
+}
 .btn-groups{
     display: flex;
     gap: 1rem;
